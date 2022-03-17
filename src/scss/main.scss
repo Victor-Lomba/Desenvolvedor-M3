@@ -1,1 +1,45 @@
 @import "reset";
+
+:root{
+    --primary-color: rgba(0, 192, 238, 1);
+    --black: rgba(0, 0, 0, 1);
+    --gray-1: rgba(0, 0, 0, 0.5);
+    --gray-2: rgba(102, 102, 102, 1);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    height: 62px;
+    width: 100%;
+    border-bottom: 2px solid #C7C7C7;
+    button {
+        background: none;
+        position: relative;
+        border: none;
+        &:hover{
+            cursor:pointer;
+        }
+
+        &::after{
+            content: "2";
+            position: absolute;
+            bottom: 0;
+            right: -5px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            width: 0.75rem;
+            height: 0.75rem;
+            font-size: 10px;
+            color: white;
+        }
+    }
+}
