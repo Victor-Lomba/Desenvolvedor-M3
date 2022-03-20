@@ -1,6 +1,8 @@
 let toggles = new Map();
 
-
+const setFilterValue = (key,value) => {
+    toggles.set(key,value);
+}
 
 window.onload = () => {
     const dropButton = document.querySelector(".dropdown");
@@ -23,7 +25,7 @@ window.onload = () => {
         checkbox.addEventListener("click",() => {
             const id = checkbox.id;
             console.log(toggles)
-            toggles.set(id,!toggles.get(id));
+            setFilterValue(id,!toggles.get(id));
             checkbox.classList.toggle("checked",toggles.get(id));
         });
     });
