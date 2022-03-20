@@ -1,3 +1,4 @@
+require("./products");
 let toggles = new Map();
 
 const setFilterValue = (key,value) => {
@@ -29,5 +30,4 @@ window.onload = () => {
             checkbox.classList.toggle("checked",toggles.get(id));
         });
     });
-
 }
