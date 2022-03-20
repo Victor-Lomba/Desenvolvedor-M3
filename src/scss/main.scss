@@ -36,16 +36,15 @@ header {
             cursor:pointer;
         }
 
-        &::after{
-            content: "1";
+        span{
             position: absolute;
             line-height: 11.72px;
             bottom: 0;
             right: -5px;
             background: var(--primary-color);
             border-radius: 50%;
-            width: 0.75rem;
-            height: 0.75rem;
+            min-width: 0.75rem;
+            min-height: 0.75rem;
             font-size: 10px;
             color: white;
         }
@@ -120,7 +119,7 @@ main{
         flex-direction: column;
         gap: 24px;
         background: white;
-        transition: 0.2s;
+        
         @media screen and (max-width: 768px){
             position: absolute;
             top: 0;
@@ -128,6 +127,7 @@ main{
             right: 0;
             bottom: 0;
             transform: translateX(-100%);
+            transition: transform 0.2s;
             &.show{
                 transform: translateX(0);
             }

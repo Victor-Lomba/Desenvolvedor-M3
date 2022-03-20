@@ -1,6 +1,9 @@
+import Cart from './cart.js';
+
 let products = [];
 let isLoading = true;
 let page = 1;
+const cart = new Cart();
 
 const setProducts = (data) => {
     products = data;
@@ -27,10 +30,19 @@ const updateProducts = () => {
                 <h3 class="product-title" >${product.name}</h3>
                 <p class="price" >R$ ${product.price.toFixed(2).replace(".",",")}</p>
                 <span class="installments">até ${product.parcelamento[0]}x de R$${product.parcelamento[1]}</span>
-                <button data-product-id="${product.id}">COMPRAR</button>
+                <button class="button-buy-product" data-product-id="${product.id}" >COMPRAR</button>
             </div>
         `;
     })
+
+    const buttons = document.querySelectorAll(".button-buy-product");
+    buttons.forEach(button => {
+        button.addEventListener("click",() => {
+            const id = button.getAttribute("data-product-id");
+            const product = products.find(product => product.id == id);
+            cart.addItem(product);
+        });
+    });
 };
 
 const loadMore = () => {

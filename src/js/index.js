@@ -1,5 +1,5 @@
-require("./products");
-let toggles = new Map();
+import "./products";
+const toggles = new Map();
 
 const setFilterValue = (key,value) => {
     toggles.set(key,value);
