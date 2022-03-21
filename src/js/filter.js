@@ -12,6 +12,13 @@ export const onFilterChange = (callback) => {
     callbacks.push(() => callback());
 }
 
+const cleanFilter = () => {
+    toggles.forEach((value, key) => {
+        setFilterValue(key,false);
+    });
+    callbacks.forEach(callback => callback());
+}
+
 
 
 window.addEventListener("load",() => {
@@ -19,21 +26,35 @@ window.addEventListener("load",() => {
 
     const checkbox = document.querySelectorAll(".checkbox");
     
+    const filterClean = document.querySelector(".clean-filter-mobile");
+
+    
+    filterClean.addEventListener("click",() => {
+        cleanFilter();
+        const checkboxes = document.querySelectorAll(".checkbox");
+        checkboxes.forEach(checkbox => {
+            checkbox.classList.remove("checked");
+        });
+    });
+    
     checkbox.forEach(checkbox => {
         toggles.set(checkbox.id,false);
         checkbox.addEventListener("click",() => {
             const id = checkbox.id;
-            console.log(toggles)
             setFilterValue(id,!toggles.get(id));
             checkbox.classList.toggle("checked",toggles.get(id));
         });
     });
 
     for(let i = 1; i < 4; i++){
-        const buttonOrder = document.querySelector(`.order-${i}`);
-        buttonOrder.addEventListener("click",() => {
-            order = i;
-            callbacks.forEach(callback => callback());
+        const buttonOrder = document.querySelectorAll(`.order-${i}`);
+        buttonOrder.forEach(button => {
+            button.addEventListener("click",() => {
+                order = i;
+                callbacks.forEach(callback => callback());
+                document.querySelector(".ordenar-drawer").classList.remove("show");
+                document.querySelector(".orderBy-text").innerHTML = button.innerHTML + "<img src='img/arrow.svg' alt='arrow down'>";
+            });
         });
     }
 });
@@ -70,7 +91,6 @@ export const filter = (array) => {
     }
 
     if(order === 1){
-        // compare by date
         finalArray.sort((a,b) => {
             if(a.date < b.date) return 1;
             if(a.date > b.date) return -1;

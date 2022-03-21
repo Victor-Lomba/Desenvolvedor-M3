@@ -90,7 +90,7 @@ function img() {
 function imgSquash(){
   return src(paths.img.src)
   .pipe(imagemin())
-  .pipe(dest(paths.dest + "/minified/img"));
+  .pipe(dest(paths.dest + "/img"));
 
 }
 

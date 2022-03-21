@@ -1,3 +1,4 @@
+import "./drawer";
 import "./products";
 
 window.addEventListener("load",() => {

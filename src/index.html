@@ -25,9 +25,13 @@
     </header>
     <div class="menu">
       <h1>Blusas</h1>
+      <div class="menu-mobile">
+        <button class="open-mobile-filter">Filtrar</button>
+        <button class="mobile-orderBy">Ordenar</button>
+      </div>
       <div class="dropdown">
-        <p>
-          Ordenar por
+        <p class="orderBy-text">
+          Ordenar por <img src="img/arrow.svg" alt="arrow down">
         </p>
         <div class="dropdown-option" >
           <button class="order-1">Mais recentes</button>
@@ -37,7 +41,16 @@
       </div>
     </div>
     <main>
-      <aside>
+      <aside class="">
+        <div class="mobile">
+          <div>
+            <h2 class="mobile-title">FILTRAR</h2>
+            <button class="close-mobile-filter">
+              <img src="img/x.svg" alt="botão para fechar menu de filtros">
+            </button>
+          </div>
+          <hr>
+        </div>
         <div class="colors">
           <h2>CORES</h2>
           <div class="checkbox" id="Amarelo">
@@ -183,9 +196,14 @@
             <p>a partir de R$500</p>
           </div>
         </div>
+        <div class="buttons-confirm-mobile">
+          <button class="confirm-filter-mobile">APLICAR</button>
+          <button class="clean-filter-mobile">LIMPAR</button>
+          
+        </div>
       </aside>
       <section>
-        <div class="products-grid">
+        <div class="products-grid" >
         </div>
         <button class="button-load-more">CARREGAR MAIS</button>
       </section>
@@ -193,6 +211,20 @@
     <footer>
       <p>M3: IMPLANTAÇÃO DE E-COMMERCE VTEX</p>
     </footer>
+    <div class="ordenar-drawer">
+      <div>
+        <div>
+          <h2>ORDENAR</h2>
+          <button class="close-mobile-orderBy">
+            <img src="img/x.svg" alt="Botão para fechar menu de ordenar">
+          </button>
+        </div>
+        <hr></hr>
+      </div>
+      <button class="order-1">Mais recente</button>
+      <button class="order-2">Maior preço</button>
+      <button class="order-3">Menor preço</button>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>
