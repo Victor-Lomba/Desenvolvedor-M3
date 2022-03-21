@@ -1,4 +1,5 @@
 const toggles = new Map();
+let order = 0;
 let callbacks = [];
 
 const setFilterValue = (key,value) => {
@@ -27,6 +28,14 @@ window.addEventListener("load",() => {
             checkbox.classList.toggle("checked",toggles.get(id));
         });
     });
+
+    for(let i = 1; i < 4; i++){
+        const buttonOrder = document.querySelector(`.order-${i}`);
+        buttonOrder.addEventListener("click",() => {
+            order = i;
+            callbacks.forEach(callback => callback());
+        });
+    }
 });
 
 
@@ -60,6 +69,22 @@ export const filter = (array) => {
         }
     }
 
+    if(order === 1){
+        // compare by date
+        finalArray.sort((a,b) => {
+            if(a.date < b.date) return 1;
+            if(a.date > b.date) return -1;
+            return 0;
+        });
+    }
+
+    if(order === 2){
+        finalArray.sort((a,b) => a.price - b.price);
+    }
+
+    if(order === 3){
+        finalArray.sort((a,b) => b.price - a.price);
+    }
 
 
     if(noColor && noSize && noPrice) {
