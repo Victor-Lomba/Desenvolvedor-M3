@@ -31,7 +31,7 @@ window.addEventListener("load",() => {
 
 
 export const filter = (array) => {
-    let finalArray = [];
+    let finalArray = array;
     let noColor = true;
     let noSize = true;
     let noPrice = true;
@@ -40,24 +40,26 @@ export const filter = (array) => {
     let sizes = ["P","M","G","GG","U","36","38","40","42","44","46"];
     let prices = ["0-50", "51-150", "151-300", "301-500", "501-+"];
 
+
     for(let i = 0; i < colors.length; i++){
         if(toggles.get(colors[i])){
             noColor = false;
-            finalArray = [...finalArray, ...array.filter(product => product.color === colors[i])];
+            finalArray = finalArray.filter(product => product.color === colors[i]);
         }
     }
     for(let i = 0; i < sizes.length; i++) {
         if(toggles.get(sizes[i])) {
-            finalArray = [...finalArray, ...array.filter(product => product.size.includes(sizes[i]))];
             noSize = false;
+            finalArray = finalArray.filter(product => product.size.includes(sizes[i]));
         }
     }
     for(let i = 0; i < prices.length; i++) {
         if(toggles.get(prices[i])) {
-            finalArray = [...finalArray, ...array.filter(product => product.price >= parseInt(prices[i].split("-")[0]) && product.price <= parseInt(prices[i].split("-")[1].replace("+",Number.MAX_VALUE)) )];
             noPrice = false;
+            finalArray = finalArray.filter(product => product.price >= parseInt(prices[i].split("-")[0]) && product.price <= parseInt(prices[i].split("-")[1].replace("+",Number.MAX_VALUE)) );
         }
     }
+
 
 
     if(noColor && noSize && noPrice) {
