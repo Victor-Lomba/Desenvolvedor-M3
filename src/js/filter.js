@@ -71,23 +71,53 @@ export const filter = (array) => {
     let prices = ["0-50", "51-150", "151-300", "301-500", "501-+"];
 
 
-    for(let i = 0; i < colors.length; i++){
-        if(toggles.get(colors[i])){
-            noColor = false;
-            finalArray = finalArray.filter(product => product.color === colors[i]);
-        }
-    }
-    for(let i = 0; i < sizes.length; i++) {
-        if(toggles.get(sizes[i])) {
+    const filteredColors = colors.filter((color) => 
+        {
+            if(toggles.get(color)){
+                noColor = false;
+                return true;
+            }
+            return false;
+        } );
+
+        
+    if(filteredColors.length > 0){
+        finalArray = finalArray.filter(product => {
+            return filteredColors.includes(product.color);
+        })
+    }   
+
+    const filteredSizes = sizes.filter((size) => {
+        if(toggles.get(size)){
             noSize = false;
-            finalArray = finalArray.filter(product => product.size.includes(sizes[i]));
+            return true;
         }
+        return false;
+    });
+
+    if(filteredSizes.length > 0){
+        finalArray = finalArray.filter(product => {
+            return filteredSizes.some(r => {
+                console.log(r,product.size);
+                return product.size.includes(r)});
+        });
     }
-    for(let i = 0; i < prices.length; i++) {
-        if(toggles.get(prices[i])) {
+
+    const filteredPrices = prices.filter((price) => {
+        if(toggles.get(price)){
             noPrice = false;
-            finalArray = finalArray.filter(product => product.price >= parseInt(prices[i].split("-")[0]) && product.price <= parseInt(prices[i].split("-")[1].replace("+",Number.MAX_VALUE)) );
+            return true;
         }
+        return false;
+    })
+
+    if(filteredPrices.length > 0){
+        finalArray = finalArray.filter(product => {
+            return filteredPrices.some(r => {
+                console.log(r,product.price);
+                return product.price >= parseInt(r.split("-")[0]) && product.price <= parseInt(r.split("-")[1].replace("+",Number.MAX_VALUE)); 
+                });
+        });
     }
 
     if(order === 1){
