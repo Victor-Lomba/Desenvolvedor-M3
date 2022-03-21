@@ -16,8 +16,9 @@
 }
 
 body{
-    min-width: 375px;
+    min-width: 350px;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 button{
@@ -59,7 +60,10 @@ header {
 }
 
 .ordenar-drawer{
+    display: none;
+    overflow-y: hidden;
     @media screen and (max-width: 768px){
+        overflow-y: scroll;
         font-family: "Open Sans", sans-serif;
         > div > div {
             display: flex;
@@ -264,6 +268,7 @@ main{
         }
         
         @media screen and (max-width: 768px){
+            overflow-y: hidden;
             min-width: 375px;
             position: absolute;
             top: 0;
@@ -294,6 +299,8 @@ main{
                 width: fit-content;
             }
             &.show{
+                overflow-y: scroll;
+                overflow-x: hidden;
                 transform: translateX(0);
             }
         }
@@ -303,6 +310,7 @@ main{
         display: flex;
         align-items: center;
         flex-direction: column;
+        overflow-x: hidden;
         
         .button-load-more{
             width: 175px;
@@ -320,6 +328,8 @@ main{
 
         @media screen and (max-width: 768px){
             overflow-y: hidden;
+            min-height: 56.8vh;
+            padding: 0 4%;
         }
     }
 
