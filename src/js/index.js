@@ -1,11 +1,6 @@
 import "./products";
-const toggles = new Map();
 
-const setFilterValue = (key,value) => {
-    toggles.set(key,value);
-}
-
-window.onload = () => {
+window.addEventListener("load",() => {
     const dropButton = document.querySelector(".dropdown");
     const dropOption = document.querySelector(".dropdown-option");
     dropButton.addEventListener("mouseover",() => {
@@ -19,15 +14,4 @@ window.onload = () => {
     });
 
 
-    const checkbox = document.querySelectorAll(".checkbox");
-
-    checkbox.forEach(checkbox => {
-        toggles.set(checkbox.id,false);
-        checkbox.addEventListener("click",() => {
-            const id = checkbox.id;
-            console.log(toggles)
-            setFilterValue(id,!toggles.get(id));
-            checkbox.classList.toggle("checked",toggles.get(id));
-        });
-    });
-}
+});

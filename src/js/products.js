@@ -1,14 +1,14 @@
 import Cart from './cart.js';
+import { filter, onFilterChange } from './filter.js';
 
 let products = [];
 let isLoading = true;
 let page = 1;
 const cart = new Cart();
 
-const setProducts = (data) => {
-    products = data;
-    updateProducts();
-}
+
+
+
 
 fetch('http://localhost:5000/products?_limit=6',
 ).then(data => {
@@ -23,7 +23,7 @@ const updateProducts = () => {
     if(isLoading) return;
     const productsGrid = document.querySelector(".products-grid");
     productsGrid.innerHTML = "";
-    products.forEach(product => {
+    filter(products).forEach(product => {
         productsGrid.innerHTML += `
             <div class="product ${product.color}">
                 <img src="${product.image}" alt="${product.name}">
@@ -35,6 +35,13 @@ const updateProducts = () => {
         `;
     })
 
+    if(filter(products).length === 0){
+        productsGrid.innerHTML = `
+            <div class="product-not-found">
+                <h3>Nenhum produto encontrado</h3>
+            </div>
+        `;
+    }
     const buttons = document.querySelectorAll(".button-buy-product");
     buttons.forEach(button => {
         button.addEventListener("click",() => {
@@ -44,6 +51,13 @@ const updateProducts = () => {
         });
     });
 };
+
+const setProducts = (data) => {
+    products = data;
+    updateProducts();
+}
+
+onFilterChange(updateProducts);
 
 const loadMore = () => {
     fetch(`http://localhost:5000/products?_limit=6&_page=${++page}`,
